@@ -1,23 +1,31 @@
-import logo from './logo.svg';
 import './App.css';
+import { useSelector , useDispatch } from 'react-redux';
+import { increament , decreament , increamentby30 } from './redux/Slice/counterSlice';
+
+// to use the value of the store is useSelector;
+// to update the value of the store is useDispatch;
 
 function App() {
+  const count = useSelector((state)=>state.counter);
+  const dispatch = useDispatch();
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <center>
+        <button onClick={()=>dispatch(increament())}>
+          +
+        </button>
+        {count.value ? count.value : count}
+        <button onClick={()=>dispatch(decreament())}>
+          -
+        </button>
+        <button onClick={()=>dispatch(increamentby30({
+          content : "increamented by 30",
+          value : 30
+        }))}>
+          increament by 30
+        </button>
+
+      </center>
     </div>
   );
 }
